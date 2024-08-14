@@ -1,0 +1,65 @@
+body {
+    overflow: hidden; /* スクロールを無効にする */
+    position: fixed; /* 位置を固定する */
+    top: 0; /* 上部からの位置 */
+    left: 0; /* 左部からの位置 */
+    width: 100%; /* 幅を全体に広げる */
+    height: 100%; /* 高さを全体に広げる */
+}
+
+.background-slider {
+    width: 100%;
+    height: 100vh; /* 画面全体の高さに変更 */
+    overflow: hidden;
+    position: relative;
+
+  }
+  
+  .slider-track {
+    width: 900%; /* 9枚の画像を横並びにするための幅 */
+    height: 100%;
+    background-image: url('../img/back.png'); /* 9枚の後に再度2枚追加してループをスムーズにする */
+    background-size: 100% 100%; /* 9枚の画像が均等に並ぶように調整 */
+    background-repeat: no-repeat;
+    background-position: 0 0; /* ループをスムーズにするための追加 */
+    animation: slide 100s linear infinite; /* アニメーションの時間を調整 */
+  }
+  
+  @keyframes slide {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-88.8888%); /* ループが終わる地点を調整 */
+    }
+  }
+  
+
+  @keyframes infinity-scroll-left {
+    from {
+      transform: translateX(0);
+    }
+      to {
+      transform: translateX(-100%);
+    }
+    }
+    .scroll-infinity__wrap {
+      display: flex;
+      overflow: hidden;
+      position: absolute;
+    }
+    .scroll-infinity__list {
+      display: flex;
+      list-style: none;
+      padding: 0
+    }
+    .scroll-infinity__list--left {
+      animation: infinity-scroll-left 25s infinite linear 0s both;
+    }
+    .scroll-infinity__item {
+      width: 280px;
+    }
+    .scroll-infinity__item>img {
+      width: 100%;
+    }
+  
