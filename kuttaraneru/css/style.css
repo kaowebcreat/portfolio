@@ -7,59 +7,109 @@ body {
     height: 100%; /* 高さを全体に広げる */
 }
 
-.background-slider {
+.bg-image-loop {
+	width: 10000px;
+	height: 100vh;
+	position: relative;
+	background: url("../img/back.png") repeat-x 0 0;
+	background-size: 100% 100%;
+	animation: bg-slider 150s linear infinite;
+	margin: 0;
+	padding: 0;
+}
+@keyframes bg-slider {
+	from { background-position: 0 0; }
+    to { background-position: -10000px 0; }
+}
+
+@media (min-aspect-ratio: 16/9) {
+  .bg-image-loop {
+    background-size: 100% auto;
+  }
+}
+
+@media (max-aspect-ratio: 16/9) {
+  .bg-image-loop {
+    background-size: auto 100%;
+  }
+}
+
+.loop_wrap {
+  display: flex;
+  width: 100vw;
+  height: 300px;
+  overflow: hidden;
+  position: absolute;
+  top: 30%;
+}
+
+.loop_wrap ul {
+  width: auto;
+  height: 100%;
+}
+
+@keyframes loop {
+  0% {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(-206%);
+  }
+}
+
+@keyframes loop2 {
+  0% {
+    transform: translateX(0%);
+  }
+  to {
+    transform: translateX(-306%);
+  }
+}
+
+.loop_wrap ul:first-child {
+  animation: loop 50s -25s linear infinite;
+}
+
+.loop_wrap ul:last-child {
+  animation: loop2 50s linear infinite;
+}
+
+.loop_wrap:hover li{
+  animation-play-state: paused;
+}
+
+.loop_wrap ul {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-flow: row nowrap;
+  flex-flow: row nowrap;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.loop_wrap li {
+    display: inline-block;
+    width: calc(100vw / 4);
+    min-width: min(250px,16.666666666666667vw);
+    margin: 0 2.5vw 0 0;
+    list-style: none;
+    text-align: center;
+}
+
+.loop_wrap li img {
+    display: block;
     width: 100%;
-    height: 100vh; /* 画面全体の高さに変更 */
-    overflow: hidden;
-    position: relative;
+    height: auto;
+}
 
-  }
-  
-  .slider-track {
-    width: 900%; /* 9枚の画像を横並びにするための幅 */
-    height: 100%;
-    background-image: url('../img/back.png'); /* 9枚の後に再度2枚追加してループをスムーズにする */
-    background-size: 100% 100%; /* 9枚の画像が均等に並ぶように調整 */
-    background-repeat: no-repeat;
-    background-position: 0 0; /* ループをスムーズにするための追加 */
-    animation: slide 100s linear infinite; /* アニメーションの時間を調整 */
-  }
-  
-  @keyframes slide {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(-88.8888%); /* ループが終わる地点を調整 */
-    }
-  }
-  
 
-  @keyframes infinity-scroll-left {
-    from {
-      transform: translateX(0);
-    }
-      to {
-      transform: translateX(-100%);
-    }
-    }
-    .scroll-infinity__wrap {
-      display: flex;
-      overflow: hidden;
-      position: absolute;
-    }
-    .scroll-infinity__list {
-      display: flex;
-      list-style: none;
-      padding: 0
-    }
-    .scroll-infinity__list--left {
-      animation: infinity-scroll-left 25s infinite linear 0s both;
-    }
-    .scroll-infinity__item {
-      width: 280px;
-    }
-    .scroll-infinity__item>img {
-      width: 100%;
-    }
-  
+/* ホバーでスライドを止める */
+.loop_wrap:hover ul {
+    animation-play-state: paused;
+}
+
+/* ホバー時に背景を変更する */
+.loop_wrap ul li:hover {
+    cursor: pointer;
+}
