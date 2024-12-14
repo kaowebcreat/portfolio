@@ -1,0 +1,115 @@
+body {
+    overflow: hidden; /* スクロールを無効にする */
+    position: fixed; /* 位置を固定する */
+    top: 0; /* 上部からの位置 */
+    left: 0; /* 左部からの位置 */
+    width: 100%; /* 幅を全体に広げる */
+    height: 100%; /* 高さを全体に広げる */
+}
+
+.bg-image-loop {
+	width: 10000px;
+	height: 100vh;
+	position: relative;
+	background: url("../img/back.png") repeat-x 0 0;
+	background-size: 100% 100%;
+	animation: bg-slider 150s linear infinite;
+	margin: 0;
+	padding: 0;
+}
+@keyframes bg-slider {
+	from { background-position: 0 0; }
+    to { background-position: -10000px 0; }
+}
+
+@media (min-aspect-ratio: 16/9) {
+  .bg-image-loop {
+    background-size: 100% auto;
+  }
+}
+
+@media (max-aspect-ratio: 16/9) {
+  .bg-image-loop {
+    background-size: auto 100%;
+  }
+}
+
+.loop_wrap {
+  display: flex;
+  width: 100vw;
+  height: 300px;
+  overflow: hidden;
+  position: absolute;
+  top: 30%;
+}
+
+.loop_wrap ul {
+  width: auto;
+  height: 100%;
+}
+
+@keyframes loop {
+  0% {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(-206%);
+  }
+}
+
+@keyframes loop2 {
+  0% {
+    transform: translateX(0%);
+  }
+  to {
+    transform: translateX(-306%);
+  }
+}
+
+.loop_wrap ul:first-child {
+  animation: loop 50s -25s linear infinite;
+}
+
+.loop_wrap ul:last-child {
+  animation: loop2 50s linear infinite;
+}
+
+.loop_wrap:hover li{
+  animation-play-state: paused;
+}
+
+.loop_wrap ul {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-flow: row nowrap;
+  flex-flow: row nowrap;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.loop_wrap li {
+    display: inline-block;
+    width: calc(100vw / 4);
+    min-width: min(250px,16.666666666666667vw);
+    margin: 0 2.5vw 0 0;
+    list-style: none;
+    text-align: center;
+}
+
+.loop_wrap li img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+
+/* ホバーでスライドを止める */
+.loop_wrap:hover ul {
+    animation-play-state: paused;
+}
+
+/* ホバー時に背景を変更する */
+.loop_wrap ul li:hover {
+    cursor: pointer;
+}
