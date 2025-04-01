@@ -35,7 +35,57 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 document.addEventListener("DOMContentLoaded", () => {
-    const glow = document.createElement('div'); glow.classList.add('cursor-glow');
+    const glow = document.createElement('div');
+    glow.classList.add('cursor-glow');
     document.body.appendChild(glow);
-    document.addEventListener('mousemove', (e) => { glow.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`; });
+    
+    let currentX = 0;
+    let currentY = 0;
+    let targetX = 0;
+    let targetY = 0;
+    
+    document.addEventListener('mousemove', (e) => {
+        targetX = e.clientX;
+        targetY = e.clientY;
+    });
+    
+    function animate() {
+        // Easing factor - lower value = slower movement (0.05-0.1 is a good range)
+        const ease = 0.01;
+        
+        // Calculate the distance between current and target positions
+        currentX += (targetX - currentX) * ease;
+        currentY += (targetY - currentY) * ease;
+        
+        // Apply the position with the smooth movement
+        glow.style.transform = `translate(${currentX}px, ${currentY}px)`;
+        
+        // Continue the animation loop
+        requestAnimationFrame(animate);
+    }
+    
+    // Start the animation loop
+    animate();
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    const title = document.getElementById('portfolio-title');
+    const text = title.textContent;
+    
+    // タイトルの内容をクリア
+    title.textContent = '';
+    
+    // 文字を一文字ずつ分割して新しい要素として追加
+    for (let i = 0; i < text.length; i++) {
+        const letterContainer = document.createElement('span');
+        letterContainer.className = 'letter-container';
+        
+        const letter = document.createElement('span');
+        letter.className = 'letter';
+        letter.textContent = text[i];
+        
+        letterContainer.appendChild(letter);
+        title.appendChild(letterContainer);
+    }
+});
+
